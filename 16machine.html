@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Enrico Bassi">
+    <link rel="icon" href="media/favicon.ico">
+
+    <title>Fab Academy 2015 - Enrico Bassi</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="media/fabacademy.css" rel="stylesheet">
+    <link href="media/eb.css" rel="stylesheet">
+    <!-- 3D files viewer -->
+    <script type="text/javascript" src="media/jsc3d_ie.min.js"></script>
+	<script type="text/javascript" src="media/jsc3d.min.js"></script>
+    <script type="text/javascript" src="media/jsc3d.webgl.js"></script>
+    <script type="text/javascript" src="media/jsc3d.touch.js"></script>
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="bootstrap/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="bootstrap/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <!-- Load the menu file -->
+    <script>
+	function menu() {
+					  $('#exercises').load("exercises-menu.html");
+					  $('#project').load("project-menu.html");
+					  $('#cclicense').load("license.html");
+					  }
+	</script>
+
+  </head>
+
+  <body onload="menu()">
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Enrico Bassi</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Exercises <span class="caret"></span></a>
+              <ul id="exercises" class="dropdown-menu" role="menu">
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Final Project <span class="caret"></span></a>
+              <ul id="project" class="dropdown-menu" role="menu">
+              </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+	<!-- Insert your content here below! -->
+
+
+     <h2>16. Machine That Make</h2>
+        <p>
+        For this assignment we worked in two different groups; one with a machinethat design zen gardens and another on a CNC lathe. I was in the second group. Both the machines has two axis and some extra moving part (a servo for the fist one and a drill for the second). Having a similar structure we kept the software in common.
+            <br>
+            Beside designing and making the cutting tool, i did the main desing of the CNC lathe. Here a description of the method I used. Even if draw like this is  not technically correct, I think it's pretty effective, and easy to learn and to understand.
+            <br>
+            <strong>Find the Main functional units</strong>
+            <br>
+            first step is to sketch a rought idea of the machine to estimate the main dimensions and the functional unit that compose the machine. In this case i divided it into 8 functional unit
+            <img src="images/scan_redux.jpg">
+            <br> I added some note to remember what i considered important and what to keep in mind.
+            <br><br>
+            <strong>Get into details</strong>
+            the step after, is to start with the elements that are directly related to the main constrains of the project. In this case the cutting tool must be aligned with the rotation axis of the spindle. As a consequence the X axis must keep the tool aligned in that position. This means that i could start with that block first. 
+           <img src="images/scan0002_redux.jpg">
+            <img src="images/scan0001_redux.jpg">
+            <br> Developing the project it helped me to start to add some dimensions. Of course it's possible that after a CAD they are going to change, but it's a starting point.
+            <br>
+            The main structure need a little bit more attention and to go in deep on some details. Another important information to keep in mind is the maximum diameter of the piece you want to work, we decided to have something big enough for pieces cut from a commercial foam panel.
+            <img src="images/scan0003_redux.jpg">
+            Having a main view allowed me to focus on the single parts, in particular how to make the moving part doing that without friction.
+            <img src="images/scan0004_redux.jpg">
+            <img src="images/scan0005_redux.jpg">
+            <br>
+            After the assembly is clear I moved to the description of the single elements, in particular about the mandrel and the tailstock.
+            <img src="images/scan0006_redux.jpg">
+            <img src="images/scan0007_redux.jpg">
+            <img src="images/scan0008_redux.jpg">
+            <img src="images/scan0009_redux.jpg">
+            <img src="images/scan0010_redux.jpg">
+                 
+            There is no description of the tool and the tool holder because I designed by myself. 
+            </p>
+            
+            <h3>Tool and Toolholder</h3>
+            <p>
+                I decided to make the tool with a very hard steel, even if the objective was to cut foam, this cause it's easier to make it very sharp and this is reducing the stress on the machine. The entire process was done by hand with the objective  to get a round blade on the to and straight on both sides. 
+                <img src="images/0219_redux.jpg">
+                <img src="images/0241_redux.jpg">
+                <img src="images/0247_redux.jpg">
+
+                <br> The holder is a 3D printed part, done in PETG (because of its machanical properties), that it's attached to the X axis with four M4x20 screws.
+                <img src="images/piece.JPG">
+                 <a href="media/toolholder.stl">
+	<button type="button" class="btn btn-primary btn-lg">Download toolholder.stl</button> </a>
+                
+                
+        </p>
+    
+        
+  
+    <!-- End of your content -->
+
+    </div> <!-- /container -->
+
+	<!-- footer -->
+    
+    <footer id="footer">
+        <p id="cclicense">
+        </p>
+        <p class="license">
+        Theme: <a href="https://github.com/openp2pdesign/FabAcademy_Template">Fab Academy Template</a> by <a href="http://openp2pdesign.org">Massimo Menichinelli</a> <br>
+        Based on <a href="http://getbootstrap.com/">Twitter Bootstrap</a>+<a href="http://jquery.com/">JQuery</a>+<a href="https://code.google.com/p/google-code-prettify/">google-code-prettify</a>+<a href="http://jmblog.github.io/color-themes-for-google-code-prettify/github/">GitHub theme for google-code-prettify</a>+<a href="https://code.google.com/p/jsc3d/">JSC3D</a>+<a href="https://github.com/thegrubbsian/jquery.ganttView">jquery.ganttView</a>.
+        </p>
+    </footer>
+    
+
+	<!-- Do not touch this! -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="media/jquery-1.9.1.min.js"></script>
+    
+    <!-- Syntax Highlighter -->
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js">
+    </script>
+    <!-- From https://github.com/jmblog/color-themes-for-google-code-prettify -->
+    <link href="media/github.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript">
+	  !function ($) {
+		$(function(){
+		  window.prettyPrint && prettyPrint()   
+		})
+	  }(window.jQuery)
+	</script>
+	
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
+
+  </body>
+</html>

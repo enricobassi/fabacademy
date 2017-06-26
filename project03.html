@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Enrico Bassi">
+    <link rel="icon" href="media/favicon.ico">
+
+    <title>Fab Academy 2015 - Enrico Bassi</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="media/fabacademy.css" rel="stylesheet">
+      <link href="media/eb.css" rel="stylesheet">
+    
+    <!-- 3D files viewer -->
+    <script type="text/javascript" src="media/jsc3d_ie.min.js"></script>
+	<script type="text/javascript" src="media/jsc3d.min.js"></script>
+    <script type="text/javascript" src="media/jsc3d.webgl.js"></script>
+    <script type="text/javascript" src="media/jsc3d.touch.js"></script>
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="bootstrap/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="bootstrap/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <!-- Load the menu file -->
+    <script>
+	function menu() {
+					  $('#exercises').load("exercises-menu.html");
+					  $('#project').load("project-menu.html");
+					  $('#cclicense').load("license.html");
+					  }
+	</script>
+
+  </head>
+
+  <body onload="menu()">
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Enrico Bassi</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="about.html">About</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Exercises <span class="caret"></span></a>
+              <ul id="exercises" class="dropdown-menu" role="menu">
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Final Project <span class="caret"></span></a>
+              <ul id="project" class="dropdown-menu" role="menu">
+              </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+	<!-- Insert your content here below! -->
+
+
+    <h2>Final project: Development</h2>
+        
+       
+                <h3>Electronic</h3>
+	<p>
+The board is designed based on the schematic of the CNC board by <a href="https://ryanpourcillie.files.wordpress.com" target="_blank"> Ryan Pourcillie</a>
+        <img src="images/original_board.JPG" width="900">
+        
+        <br> 
+        His schematic was mainly useful as a reference for the capacitors used. 
+        <br>
+        Here the schematic I made, based on his:
+        <img src="images/board1.jpg">
+        <br>
+        
+        And here the board:
+         <img src="images/board2.jpg">
+        <br>
+        <a href="media/smill.zip">
+	<button type="button" class="btn btn-primary btn-lg">Download "S-mill board V1"</button>
+	</a>
+        </p>
+        <p>
+        
+        It was pretty easy to connect almost everythig, these are the main issues:
+        <p>
+        <ul>
+        <li>One of the traces must pass on the corner of ATMEGA 328P</li>
+        <li>The endstops have no external pull-up resistors (i hope to fix this using the internal ones)</li>
+        <li>The enable of the stepper drivers and one of the endstop must be connected with jumpers</li>
+        </ul>
+        </p>
+      <p>
+        <br>
+        Beside being carefull in placing the traces in the center of the corner, I did a small modification on the shape of the pad in inkscape, just to have a little bit more room. So here it is the original image:
+        <img src="images/details2.jpg">
+      
+          
+        And here the small adjustment done in inkscape:
+        <img src="images/details3.jpg">
+        
+        I had no problem to solder the ATMEGA 328p without shortcircuiting anything.
+        <br>
+To make the board a little bit easier to read, I add some simple "silks" (like "GND", "Z - Axis", "+", etc.). They're pretty fragile, but still useful to have.
+          <br>
+          <img src="images/details10.jpg">
+          
+Here the jumpers used:
+          <img src="images/details13.jpg">
+          <img src="images/details15.jpg">
+          
+          <br>
+          The drivers are the DRV8825 Stepper Motor Driver, that can get to 1,5 A without cooling. I'll probably need more current, but it could work for the tests. To improve the performances I added a passive cooler
+          <img src="images/details16.jpg">
+          
+          <br>
+          The board has a connector for the FTDI and four pins to be programmed (SCK, MISO, MOSI, RESET). There pins can be removed after the debugging. 
+          <img src="images/details18.jpg">
+          
+          <br>
+          So far, I tested the board and it seems there are no electrical issues and the clock is working properly (I used a simple blink and a watch to do a very basic test).
+          <img src="images/details24.jpg">
+          
+          <br>
+          <h3>Debug and V0.2</h3>
+      <p>
+      after the first test i noticed the following problems:
+      <ul>
+      <li>Return of current from the motors power supply</li>
+          <li>Add (and then take away) pull-up resistors</li>
+          <li>Mistakes in pin mapping, because of the way the Grbl is written</li>
+          <li>Wrong stepper drivers wiring</li>
+          <li>TX\RX connection flipped</li>
+      </ul>
+    </p>
+    
+      
+      <strong>Return of current from the motor power supply</strong>
+      <br>
+      <p>
+      the board had two different circuits with a common GND, one at 12V for the motor and one at 5V from the FTDI cable. I tried to power the board with the FTDI and to upload the blink to check clock, as well as the main circuit and everything worked fine. After that I tried to power the motor's circuit at 12V. I had no shortcircuit but, because of something I don't know, from the 12V circuit an instable current (approximately from 1.8V to 2.7V), passed to the 5V circuit.  
+                
+      I tried to cut some traces without finding the problem, so it's still a mistery.
+      <br><br>
+      
+      <strong>Add (and then take away) pull-up resistors</strong>
+      <br>
+      The endstops have no pull-ups resistors (too complex to wire everything on the board), thinking to use the internal ones in the ATMEGA328p. After I tested (unsucessfully) the board, I thought to avoid any problem by adding external resistors.
+      \*foto resistenze volanti*\
+      checking better the Grbl I actually noticed that the resistors are activated by default so i decided to desolder the external i added and I'm not going to try to modify the board for that.
+      
+      
+      <br><br>
+       <strong>Mistake in pin mapping, because of the way the Grbl is written</strong>
+      <br>
+       I will use a modified version of Grbl, both because of the documentation you can find about it, and because i can fit it in the ATMEGA 328P. Reading the code I noticed that some pins cant be remapped: the information about step and dir of the motors are writtend not pin by pin but writing the Port and the DDR, so it's important to don't change over a certain limit. Here the wrong modification I was doing
+      /*immagine con mapping */
+      This wasn't enough but it's definitely something to integrate on the next one.
+      <br>I noticed that inverting two connections the mapping could be done properly, so I modified the board for the testing
+      /* immagine con i cavetti volanti */
+      
+      
+      <br><br>
+      <strong>Wrong stepper drivers wiring</strong>
+      I followed the wiring of original board, but the stepper driver I'm using (the <a href="http://www.pololu.com/product/2133">DRV8825</a>), has a compatible but not exactly identical wiring. Here the original drivers used on the shapeoko board
+      <br>
+          <img src="https://a.pololu-files.com/picture/0J3360.600.png?d94ef1356fab28463db67ff0619afadf">
+          While the one I used are
+      <img src="https://a.pololu-files.com/picture/0J4232.600.png?f2f6269e0a80c41f0a5147915106aa55">
+          
+          The main mistake was actually another one: I wired microstepping and emable to 5V, while to enable the board it should be grounded.
+      
+      </p>
+    <br>
+                <h3>Y movement</h3>
+	<p>
+	The most tricky part is probably how to move the machine along Y. I started following <a href="http://www.bg-cnc.com/wordpress/?p=542" target="_blank"> this</a> solution:
+  <img src="http://www.bg-cnc.com/wordpress/wp-content/uploads/2009/07/realistic-x-sect.jpg" alt="components" height="600" width="900">
+        <img src="http://www.bg-cnc.com/wordpress/wp-content/uploads/2014/10/New-Belt-Drive-Side.jpg" alt="components" height="600" width="900">
+        
+        <br>
+        This allow me to dismount the machine without too many problems. <br>
+    The first solution to test is to use a circular belt moved by a stepper that use a secont linear belt glued to the rail as a rack. 
+	</p>
+      
+        <img src="media/detail_y.svg" alt="Detail Y axis" height="600" width="800">           
+        
+      <p>
+	<strong>
+        A - Circular belt <br>
+        B - Pulley <br>
+        C - Y motor <br>
+        D - Linear belt (rack) <br>   
+          </strong>  
+    <br>
+	
+	<a href="media/detail_y.svg">
+	<button type="button" class="btn btn-primary btn-lg">Download "Detail_Y.svg"</button>
+	</a>
+    <br><br>
+      The solution I made so far is wrong dimensionally but the idea could work
+          
+          <img src="images/structure62.jpg">
+          
+          It works like a caterpillar track that moves over another timing belt used as a rack. 
+          <img src="images/structure71.jpg">
+          
+          To guarantee the proper pressure and avoid backlash, the structure is preloaded with springs
+          <img src="images/structure72.jpg">
+
+             <h3>Z movement</h3>
+    <p>
+    To move in Z the entire machine is sliding down. This seems to me the most rigid way to move the structure instead of have a Z axis made as usual. The objective was to keep the force loop as short as possible.
+    
+    <br>
+    Here two Z position compared (first high and then low)
+    <img src="images/pos1.JPG" width="900">
+    <br>
+    
+    The movimentation is done with two motors and two threaded bars. To avoid the backlash I designed two 3D printed parts preloaded with a spring and aligned with four screws
+    <img src="images/structure69.jpg">
+    </p>
+        
+
+
+
+<h2>Second (and last) round of development</h2>
+
+<p>Following the suggestion to Spiral Develop the project, I decided to restart to implement all the problem I found during the first round. It was planned a third round as well, but because both time and costs, I stopped at the second.</p>
+
+    <h3>Things to implement</h3>
+    <p>
+        Here a quick overview of the implementations. Some are very simple, while some other took me a long time.
+        <br><br>
+    <strong>Belt tensioner</strong>
+        <br>this is a pretty crucial piece in the project, and it gave me a lot of troubles. the main problem was to keep the closed belt properly tensioned and prevent to have a slipping belt.
+        To guarantee a good power transmission between the belt attached to the linear rail and the one touching the motor the tensioner is kept pressed with two springs. When you slide the guide, the tensioner slide back a bit and the springs keep the proper pressure
+    <img src="images/final017.jpg">
+    <img src="images/final018.jpg">
+        The back side is that the closed belt completely lost the tension. 
+    <img src="images/final021.jpg">
+        It's possible to notice that there is another problem: the screws used to keep the stepper are touching the border of the piece. I temporarely solved it cutting and drilling in the plastic to go on doing tests. But it's definitely not a permanent solution.
+        Here a test on the movement. Without stress it's working, but it need to be implemented a lot to actually work reliably while the machine si milling
+        <br>
+        <p class="pic">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/i5RSwoCDelQ" frameborder="0" allowfullscreen></iframe></p>
+        
+        
+        <p>
+        <br>
+        The best way to keep the two bearings was to make a sort of screw as a pin.
+        <br> First of all it's to check how logn you need it. 
+            <img src="images/structure13.jpg">
+        <br> The second step is to cut the head to easily screw it inside.
+    <img src="images/structure14.jpg">
+        <br> ater that it's enough to cut it. I used a angular grinder, but it's possible to cut it with a hand tool as well.
+            <img src="images/structure15.jpg">
+            <img src="images/structure16.jpg">
+        <br><br>
+        
+        I decided to go on with a different solution, with no closed belt, but following the original suggestion. This made much more complex to place and remove the working plane, but at least ti was working. To test it and avoid the "spring problem" I add two stops temporarely kept in position by a couple of screws.
+                <img src="images/final046.jpg">
+            <br>
+            Here the way it behaved without
+            <p class="pic">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/SZOjDv_ZsuQ" frameborder="0" allowfullscreen></iframe>
+    </p>
+    <p>
+        <br>
+        The second version has no springs but it's regulated with two M4 screws.
+        <img src="images/final32.jpg">
+        <br> 
+    In this case place and remove the linear guide is more complex and it takes a specific process.
+        the easier way to keep the belt in tension was to use two washers and a screw.
+        <img src="images/final045.jpg">
+        
+        
+    <br><br>
+    
+    <strong>Bearing rings position</strong>
+        <br>
+    To understand where to place the bearing ring to keep the tension i drawn the arch the central hole was doing while movinf around the pulley. Opening it a little bit the tension was increasing moving it closer to the pulley.
+    <img src="images/final06.jpg">
+    
+    <br><br>
+    <strong>Alining the linear sleeves</strong>
+        <br> When you tight the bolds of the linear sleeves, they slightly rotate, this mean that the two holes are not aligned anymore. This increase the friction a lot, so, before sliding the linear guide inside, I used a shorter version to straight them back.
+    <img src="images/final036.jpg">
+    </p>
+<br>
+    <h3>How to assemble some complex parts</h3>
+    <p>
+        <br><br>
+    <strong>Y linear guide</strong>
+        <br>
+        The linear guide is composed by three different elements: the linear guide itself, an aluminium profile (L shape, 40x20x1.5 mm) and a belt glued to the surface that works like a rack.
+        <br>
+        First of all you have to drill holes in the aluminium profile. This will be used to screw everything to the working bed. A 3mm hole every 25cm should be enough.
+          <img src="images/final08.jpg">
+        <br> 
+        Even if there are holes in the linear guide for the screws, we will not use them. This cause they're gonna be covered by the belt, needed for the "Caterpillar movement". At the moment it's not working, but it's something I'm going to improve asap.
+    <img src="images/final010.jpg">
+        <br>
+        To glue them togheter I used a bicomponent glue that resist up to 180kg\cm2. This should be more than enough.
+            <img src="images/final012.jpg">
+        <br>
+        After 20 minutes it seems to be very solid.
+    <img src="images/final011.jpg">
+        
+  <br> To Glue the belt I used a superglue (cyanoacrylic glue) because of the thickness of the layer and the time needed to react.
+    <img src="images/final014.jpg">
+        <br>
+        Being somethign you have to slide in and take out, pretty often, I glued the border as well, to avoid to peel it by mistake.
+          <img src="images/final015.jpg">
+        <br> I tested both the movements by themself an then togheter with the panel.
+          <img src="images/final031.jpg">
+        
+        <br>
+        <p class="pic">
+    
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/rAp0X-s2MNA" frameborder="0" allowfullscreen></iframe>
+    </p>
+    <p>    
+        Here the final result.
+        
+          <img src="images/final032.jpg">
+        
+    </p>
+        <br>
+        
+        
+       <p> 
+           
+        <strong>Electronic</strong>
+           <br>
+           I had to fix a lot of thigns on the board. First of all in the other  one i changed the pin map of the atmega inside the GRBL, the way it was ore comfortable for the board, but there are actually some limitation on the possible connections, mainly because of the way the firmware controls the pins (we will talk abut it later). Here the V0.2. I had to change a lot of thing and to be sure about how to make it, so I tested the drivers with the GRBL before on a normal Arduino UNO.
+          <img src="images/final47.jpg">
+           <br>
+           Something that could be useful:it's important to notice that TX-RX on the board should be inverted on the FTDI cable. This means that if you follof the names written it' pretty easy to make mistakes. That's why I decided to label them already inverted in the schematic.
+        <img src="images/final4132.jpg">
+
+           <br> Here a picture of the test.
+          <img src="images/final016.jpg">
+           <br> After the first round of tests, I noticed that the driver and the motors were not powerful enought to move Smill (in particular on Y). To go on testing and debugging the project, I increased the current to the motors, this warms up a lot the driver, so i decided to use two heat sinks: one over the chip (bigger) and one underneath, where the PCB has the heat sink pad. 
+          <img src="images/final034.jpg">
+           <br>
+           To increase the air flow and to protect the pcb i made a small lasercut box with two fans, blowing in opposite directions
+                     <img src="images/final039.jpg">
+           <br>
+I used the first frame to understand how to orient the board
+          <img src="images/final07.jpg">
+           <br>
+           To have the maximum flexibility in this phase, I added a rubber profile along the borders to keep the cable standing still. This is not a very elegnat solution, but it allows me to open and close the box quickly and to move a bit the board without problems. When closed the friction between the two layers keeps the cables from moving.
+          <img src="images/final038.jpg">
+           <br>
+           To prevent any loose  of data the TX, RX and GND that goes to the FTDI cable, has been soldered to the board.
+          <img src="images/final041.jpg">
+           <br>
+           And here how to connect it with the FTDI itself.
+          <img src="images/final044.jpg">
+           <br>
+           The connectors were pointing up, but it was very uncomfortable with the box.
+           
+          <img src="images/final040.jpg">
+           <br>
+           So I had to change them with the flat ones.
+          <img src="images/final042.jpg">
+           <br>
+           And that helped a lot 
+          <img src="images/final043.jpg">
+           <br>
+           I designed also small lasercut supperts for the endstops, I cabled them, attached and connected, but I had no time to test them.
+                  <img src="images/final037.jpg">
+    </p>  
+    <br>
+        <h3>Assembling the frame</h3>
+        <p>
+            I temporarely used glue and screws to assemble the parts. the frame is basically divided into two, connected along the Z axis movement.
+            Here the first half
+            <img src="images/final024.jpg">
+            <br>
+            Here how to attach the X axis motor
+            <img src="images/final026.jpg">
+            <br>
+            
+            The anti backlash system is divided in two parts: one attached to the frame with four screws, while the second can slide on the first and it's kept pushed by a spring.
+            <img src="images/final022.jpg">
+            <img src="images/final023.jpg">
+            <br>
+            The two parts looks like this before being assembled together.
+            
+            <img src="images/final027.jpg">
+            <br>
+            It's enough to screw the Z axis linear guide attached to the smaller piece, to the main surface of the bigger one and connect the threaded bar to the motors.
+            <img src="images/final030.jpg">
+            
+
+    </p>
+            
+    <h3>Cables and connections</h3>
+    <p>
+    As you can see, to connect all the parts and keep them together, I had to use a bunch of different solutions, pretty effective, but definitely not elegant.
+            <img src="images/final34.jpg">
+            <img src="images/final35.jpg">
+            <img src="images/final37.jpg">
+         <img src="images/final33.jpg">
+    </p>
+    
+     <h3>Firmware, how to edit GRBL</h3>
+    <p>
+        When I first edit the GRBL, I changed the pins to make it easier to route the connections on the board. That was a big mistake: because of the way it's written all the pins used for the stepper, must be under the same port. Being writte in C and being a pretty complex code, I wasn't able to fully understand it, but the comments are very helpful and very descriptive. This helped me a lot. This was the first version I did and it was wrong. 
+    <img src="images/final416.jpg">
+        <br>
+        And here the wrong connections, based on the mistake in the code.
+     <img src="images/final496.jpg"> 
+        <br>
+        So I changed the connections on the schematic
+        <img src="images/final4127.jpg"> 
+        <br>
+        And the pins in the GRBL. These are the correct parameters that i used, paying attention to all the notes and comments written in the code.
+        You have to add this modifications in "cpu_maps.h"
+        <img src="images/final411.jpg">
+        <br>
+        Almost all the configurations are in the file "config.h", In my case the most important one was to disable the endstop and the homing routine at the beginning. With that active, debugging the machine and go on with the test would have been much more complex.
+        <img src="images/final417.jpg">
+<br>
+        All the setting of working area, step per mm, accelleration, etc. are in che config file, but they are memorized in the EEPROM.
+        <img src="images/final4128.jpg">
+   This means that you can edit them to bring on the fine tuning, directly from the GRBL controller, using some command lines
+        <img src="images/final4129.jpg">
+        If you send wrong commands, or unexisting ones, you get back a negative feedback.
+        <br> On <a href="https://github.com/grbl/grbl/wiki/Configuring-Grbl-v0.9">this page</a> of the GRBL github, you have a list of all the commands. The most importan are Accellerations, Max feed speed and Step per mm. There allows you to properly calibrate the machine, test the limits, and compensate if you switch from one microstep value to another, without uploading the GRBL anymore.
+    </p>
+  
+    
+    <h3>Generate g-code // Tests</h3>
+    
+    <p>
+        
+        I tried a lot of possible CAM to generate a g-code, but i had some trouble on the supported commands or the exporting postprocessor.
+        The easier way has been to use the Fabmodules. Here the test exporting the electronic board
+    <img src="images/final414.jpg"> 
+        <img src="images/final49.jpg"> 
+        <br>
+        This is the GRBL controller while the machine is working
+            <img src="images/final415.jpg"> 
+        <br> And this is with the scaled frame.
+            <img src="images/final497.jpg"> 
+        I didn't get how to add tabs on the cutting, but beside that it worked perfectly.
+
+    </p>
+    
+<h3>Extra: test for the back support</h3>
+        <p>
+            To increase the stability and keeping in mind that smill should be able to cut pieces out of the working bed as well, i tried to make a support for the back of the panel to reduce the stresso on the guides. 
+            The idea was to have two elements with two bearing mounted at 50mm one from the other, that keep pressed two pipes against the back of the panel. the end mill could fit between the pipes without touching them, but this should reduce the vibrations. being a very heavy duty work, I preferred to use traditional welding systems with steel components.
+            The processo hasn't been implemented and it makes no sense to explain it in detail, but here it's possible to have an idea on how it worked.
+            <img src="images/structure6.jpg">
+            <img src="images/structure3.jpg">
+            <img src="images/structure2.jpg">
+            <img src="images/structure7.jpg">
+            <img src="images/structure11.jpg">
+            <img src="images/structure27.jpg">
+            <img src="images/structure36.jpg">
+            <img src="images/structure37.jpg">
+            <img src="images/structure48.jpg">
+            <img src="images/structure45.jpg">
+            <img src="images/structure49.jpg">
+            <img src="images/structure52.jpg">
+            
+    </p>
+    
+    
+   
+    <h3>Download</h3>
+    <p>
+    
+    Here you can find all the files needed to make Smill
+        <br><br>
+    
+    <strong>Board</strong><br>
+    <a href="media/board_V2.zip">
+             <button type="button" class="btn btn-primary btn-lg">Download "Board V0.2"</button> </a>
+    <br><br><br>
+    <strong>Electronic Box</strong><br>
+    <a href="media/electronic_box.zip">
+             <button type="button" class="btn btn-primary btn-lg">Download "Box for electronic"</button> </a>
+    <br><br><br>
+    <strong>Anti-backlash Z</strong><br>
+    <a href="media/backslash.zip">
+             <button type="button" class="btn btn-primary btn-lg">Download "Anti backlash Z axis"</button> </a>
+    <br><br><br>
+    <strong>Y belt tensioner</strong><br>
+    <a href="media/belt_tensioner.zip">
+             <button type="button" class="btn btn-primary btn-lg">Download "Belt tensioner.stl"</button> </a><br><br>
+        <a href="media/pulley_608zz.stl">
+             <button type="button" class="btn btn-primary btn-lg">Download "Pulley.stl"</button> </a>
+    <br><br><br>
+   <strong> Spindel Support (3D+laser)</strong><br>
+    <a href="media/mill_support_v1.zip">
+             <button type="button" class="btn btn-primary btn-lg">Download "spindle holder 3D printed part"</button> </a><br>
+        <br>
+    <a href="media/mill_plate.zip">
+             <button type="button" class="btn btn-primary btn-lg">Download "Spindle holder Lasercut part"</button> </a>
+    <br><br><br>
+   <strong> Frame</strong><br>
+    <a href="media/frame_cut.zip">
+             <button type="button" class="btn btn-primary btn-lg">Download "Frame for the cut.dxf"</button> </a>
+    <br><br><br>
+    <strong>GRBL for Smill</strong><br>
+    <a href="media/grblUpload_for%20Smill.zip">
+             <button type="button" class="btn btn-primary btn-lg">Download "GRBL for Smill"</button> </a>
+    
+    <br>
+</p>
+
+    <!-- End of your content -->
+
+    </div> <!-- /container -->
+
+	<!-- footer -->
+    
+    <footer id="footer">
+        <p id="cclicense">
+                </p>
+        <p class="license">
+        Theme: <a href="https://github.com/openp2pdesign/FabAcademy_Template">Fab Academy Template</a> by <a href="http://openp2pdesign.org">Massimo Menichinelli</a> <br>
+        Based on <a href="http://getbootstrap.com/">Twitter Bootstrap</a>+<a href="http://jquery.com/">JQuery</a>+<a href="https://code.google.com/p/google-code-prettify/">google-code-prettify</a>+<a href="http://jmblog.github.io/color-themes-for-google-code-prettify/github/">GitHub theme for google-code-prettify</a>+<a href="https://code.google.com/p/jsc3d/">JSC3D</a>+<a href="https://github.com/thegrubbsian/jquery.ganttView">jquery.ganttView</a>.
+        </p>
+    </footer>
+    
+
+	<!-- Do not touch this! -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="media/jquery-1.9.1.min.js"></script>
+    
+    <!-- Syntax Highlighter -->
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js">
+    </script>
+    <!-- From https://github.com/jmblog/color-themes-for-google-code-prettify -->
+    <link href="media/github.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript">
+	  !function ($) {
+		$(function(){
+		  window.prettyPrint && prettyPrint()   
+		})
+	  }(window.jQuery)
+	</script>
+	
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
+
+  </body>
+</html>
